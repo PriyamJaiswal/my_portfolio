@@ -1,0 +1,21 @@
+<svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="backendGrad" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse">
+      <stop offset="0.2" stop-color="#FFDB6E"/>
+      <stop offset="1" stop-color="#FFBC5E"/>
+    </linearGradient>
+  </defs>
+  <!-- Server 1 -->
+  <rect x="5" y="6" width="30" height="11" rx="3" stroke="url(#backendGrad)" stroke-width="2" fill="url(#backendGrad)" fill-opacity="0.12"/>
+  <circle cx="10" cy="11.5" r="1.5" fill="url(#backendGrad)"/>
+  <circle cx="15" cy="11.5" r="1.5" fill="url(#backendGrad)"/>
+  <line x1="22" y1="11.5" x2="30" y2="11.5" stroke="url(#backendGrad)" stroke-width="2" stroke-linecap="round"/>
+  <!-- Server 2 -->
+  <rect x="5" y="21" width="30" height="11" rx="3" stroke="url(#backendGrad)" stroke-width="2" fill="url(#backendGrad)" fill-opacity="0.12"/>
+  <circle cx="10" cy="26.5" r="1.5" fill="url(#backendGrad)"/>
+  <circle cx="15" cy="26.5" r="1.5" fill="url(#backendGrad)"/>
+  <line x1="22" y1="26.5" x2="30" y2="26.5" stroke="url(#backendGrad)" stroke-width="2" stroke-linecap="round"/>
+  <!-- Code bracket badge -->
+  <rect x="18" y="15" width="18" height="11" rx="3" fill="#1e1e1f" stroke="url(#backendGrad)" stroke-width="1.5"/>
+  <path d="M22 18.5L20 20.5L22 22.5M32 18.5L34 20.5L32 22.5M28 17.5L26 23.5" stroke="url(#backendGrad)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

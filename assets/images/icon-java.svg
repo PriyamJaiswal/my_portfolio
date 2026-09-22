@@ -1,0 +1,20 @@
+<svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="javaGrad" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse">
+      <stop offset="0.2" stop-color="#FFDB6E"/>
+      <stop offset="1" stop-color="#FFBC5E"/>
+    </linearGradient>
+  </defs>
+  <!-- Steam 1 -->
+  <path d="M15 6C13.5 9 16.5 12 15 15" stroke="url(#javaGrad)" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+  <!-- Steam 2 -->
+  <path d="M20 4C18.5 8 22 11 20.5 15" stroke="url(#javaGrad)" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+  <!-- Steam 3 -->
+  <path d="M25 6C23.5 9 26.5 12 25 15" stroke="url(#javaGrad)" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+  <!-- Cup body -->
+  <path d="M8 18H28C28 18 28.5 28 25 31C22 33 14 33 11 31C7.5 28 8 18 8 18Z" stroke="url(#javaGrad)" stroke-width="2.2" stroke-linejoin="round" fill="url(#javaGrad)" fill-opacity="0.15"/>
+  <!-- Handle -->
+  <path d="M28 20C32 20 33 26 27 27" stroke="url(#javaGrad)" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+  <!-- Saucer -->
+  <path d="M5 34C13 36 23 36 31 34" stroke="url(#javaGrad)" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+</svg>
