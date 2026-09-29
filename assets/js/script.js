@@ -158,59 +158,52 @@ for (let i = 0; i < formInputs.length; i++) {
   });
 }
 
-// contact form submission directly to email via FormSubmit
+// contact form submission directly via WhatsApp and backup delivery
 if (form) {
   form.addEventListener("submit", async function (e) {
     e.preventDefault();
 
     const originalBtnHtml = formBtn.innerHTML;
     formBtn.setAttribute("disabled", "");
-    formBtn.innerHTML = '<ion-icon name="hourglass-outline"></ion-icon><span>Sending...</span>';
+    formBtn.innerHTML = '<ion-icon name="logo-whatsapp"></ion-icon><span>Opening WhatsApp...</span>';
 
     if (formStatus) {
       formStatus.style.display = "none";
       formStatus.className = "form-status";
     }
 
+    const nameVal = form.querySelector('[name="name"]')?.value || "";
+    const emailVal = form.querySelector('[name="email"]')?.value || "";
+    const phoneVal = form.querySelector('[name="phone"]')?.value || "";
+    const messageVal = form.querySelector('[name="message"]')?.value || "";
+
+    // Construct formatted WhatsApp text
+    const waText = `Hi Priyam!\n\n👤 *Name:* ${nameVal}\n📧 *Email:* ${emailVal}\n📱 *Mobile:* ${phoneVal}\n\n💬 *Message:*\n${messageVal}`;
+    const waUrl = `https://wa.me/918953451053?text=${encodeURIComponent(waText)}`;
+
     const formData = new FormData(form);
 
-    try {
-      const response = await fetch("https://formsubmit.co/ajax/priyamj608@gmail.com", {
-        method: "POST",
-        headers: {
-          'Accept': 'application/json'
-        },
-        body: formData
-      });
+    // Send backup copy in background via FormSubmit
+    fetch("https://formsubmit.co/ajax/priyamj608@gmail.com", {
+      method: "POST",
+      headers: { 'Accept': 'application/json' },
+      body: formData
+    }).catch(() => {});
 
-      const data = await response.json().catch(() => ({}));
-
-      if (response.ok && data.success !== "false") {
-        if (formStatus) {
-          formStatus.className = "form-status success";
-          formStatus.style.display = "flex";
-          formStatus.innerHTML = '<ion-icon name="checkmark-circle-outline"></ion-icon><span>Thank you! Your message has been delivered to Priyam\'s email (priyamj608@gmail.com).</span>';
-        }
-        form.reset();
-        formBtn.setAttribute("disabled", "");
-      } else if (data.message && data.message.toLowerCase().includes("activate")) {
-        if (formStatus) {
-          formStatus.className = "form-status";
-          formStatus.style.display = "flex";
-          formStatus.style.color = "#FFDB6E";
-          formStatus.style.borderColor = "rgba(255, 219, 112, 0.4)";
-          formStatus.innerHTML = '<ion-icon name="alert-circle-outline"></ion-icon><span>One-Time Setup: Please check your Gmail (priyamj608@gmail.com) and click "Activate Form". After that, messages will arrive instantly!</span>';
-        }
-      } else {
-        throw new Error(data.message || "Submission failed");
-      }
-    } catch (err) {
-      // Fallback native submit
-      form.submit();
-      return;
-    } finally {
-      formBtn.innerHTML = originalBtnHtml;
+    // Show instant success feedback
+    if (formStatus) {
+      formStatus.className = "form-status success";
+      formStatus.style.display = "flex";
+      formStatus.innerHTML = '<ion-icon name="checkmark-circle-outline"></ion-icon><span>Redirecting to WhatsApp! Your message has also been saved.</span>';
     }
+
+    // Open WhatsApp directly
+    setTimeout(() => {
+      window.open(waUrl, "_blank");
+      form.reset();
+      formBtn.innerHTML = originalBtnHtml;
+      formBtn.setAttribute("disabled", "");
+    }, 400);
   });
 }
 

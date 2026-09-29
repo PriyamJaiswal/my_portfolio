@@ -607,9 +607,13 @@
 
         </section>
 
-        <!-- Download Resume Button -->
-        <section style="margin-top: 30px; text-align: center;">
-          <a href="./assets/resume.pdf" download class="form-btn" style="display: inline-flex; width: auto; text-decoration: none;">
+        <!-- Resume Actions (View & Download) -->
+        <section style="margin-top: 35px; display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; align-items: center;">
+          <a href="./assets/resume.pdf" target="_blank" class="form-btn" style="display: inline-flex; width: auto; text-decoration: none; padding: 12px 24px; gap: 8px; align-items: center;">
+            <ion-icon name="eye-outline"></ion-icon>
+            <span>View Resume</span>
+          </a>
+          <a href="./assets/resume.pdf" download="Priyam_Jaiswal_Resume.pdf" class="form-btn" style="display: inline-flex; width: auto; text-decoration: none; padding: 12px 24px; gap: 8px; align-items: center;">
             <ion-icon name="download-outline"></ion-icon>
             <span>Download Resume</span>
           </a>
@@ -1073,7 +1077,7 @@
         <!-- Direct Quick Reach Cards -->
         <section class="quick-contact-section" style="margin-bottom: 30px;">
           <h3 class="h3 form-title" style="margin-bottom: 16px;">Quick Connect</h3>
-          <div class="quick-contact-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px;">
+          <div class="quick-contact-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px;">
             
             <a href="mailto:priyamj608@gmail.com?subject=Portfolio%20Inquiry%20from%20Website" class="quick-contact-card" style="background: var(--eerie-black-2); border: 1px solid var(--jet); border-radius: 14px; padding: 16px; display: flex; align-items: center; gap: 14px; text-decoration: none; transition: 0.25s ease;">
               <div class="quick-contact-icon" style="background: var(--onyx); color: var(--orange-yellow-crayola); font-size: 24px; padding: 12px; border-radius: 12px; display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow-1);">
@@ -1086,17 +1090,6 @@
               </div>
             </a>
 
-            <a href="https://wa.me/918953451053?text=Hi%20Priyam,%20I%20saw%20your%20portfolio%20and%20wanted%20to%20connect!" target="_blank" class="quick-contact-card" style="background: var(--eerie-black-2); border: 1px solid var(--jet); border-radius: 14px; padding: 16px; display: flex; align-items: center; gap: 14px; text-decoration: none; transition: 0.25s ease;">
-              <div class="quick-contact-icon" style="background: var(--onyx); color: #25D366; font-size: 24px; padding: 12px; border-radius: 12px; display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow-1);">
-                <ion-icon name="logo-whatsapp"></ion-icon>
-              </div>
-              <div>
-                <p style="color: var(--light-gray-70); font-size: 11px; text-transform: uppercase; font-weight: 500;">WhatsApp Me</p>
-                <p style="color: var(--white-2); font-size: 13px; font-weight: 600;">+91 8953451053</p>
-                <span style="color: #25D366; font-size: 11px; display: flex; align-items: center; gap: 4px; margin-top: 2px;">Chat Directly <ion-icon name="arrow-forward-outline"></ion-icon></span>
-              </div>
-            </a>
-
             <a href="tel:+918953451053" class="quick-contact-card" style="background: var(--eerie-black-2); border: 1px solid var(--jet); border-radius: 14px; padding: 16px; display: flex; align-items: center; gap: 14px; text-decoration: none; transition: 0.25s ease;">
               <div class="quick-contact-icon" style="background: var(--onyx); color: #38bdf8; font-size: 24px; padding: 12px; border-radius: 12px; display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow-1);">
                 <ion-icon name="call-outline"></ion-icon>
@@ -1104,7 +1097,7 @@
               <div>
                 <p style="color: var(--light-gray-70); font-size: 11px; text-transform: uppercase; font-weight: 500;">Phone / Call</p>
                 <p style="color: var(--white-2); font-size: 13px; font-weight: 600;">+91 8953451053</p>
-                <span style="color: #38bdf8; font-size: 11px; display: flex; align-items: center; gap: 4px; margin-top: 2px;">Call Now <ion-icon name="arrow-forward-outline"></ion-icon></span>
+                <span style="color: #38bdf8; font-size: 11px; display: flex; align-items: center; gap: 4px; margin-top: 2px;">Call Directly <ion-icon name="arrow-forward-outline"></ion-icon></span>
               </div>
             </a>
 
@@ -1125,12 +1118,14 @@
               <input type="text" name="name" class="form-input" placeholder="Full name" required data-form-input>
 
               <input type="email" name="email" class="form-input" placeholder="Email address" required data-form-input>
+
+              <input type="tel" name="phone" class="form-input" placeholder="Mobile / Phone number" required data-form-input>
             </div>
 
             <textarea name="message" class="form-input" placeholder="Your Message" required data-form-input></textarea>
 
             <button class="form-btn" type="submit" disabled data-form-btn>
-              <ion-icon name="paper-plane"></ion-icon>
+              <ion-icon name="logo-whatsapp"></ion-icon>
               <span>Send Message</span>
             </button>
 
