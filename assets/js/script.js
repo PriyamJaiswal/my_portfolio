@@ -252,11 +252,20 @@ function navigateToIndex(newIndex, direction) {
       } else if (direction === "prev") {
         page.classList.add("slide-in-left");
       }
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      window.scrollTo(0, 0);
     } else {
       page.classList.remove("active");
     }
   });
+
+  // Mobile sidebar auto-expand on About section, auto-collapse on other sections
+  if (sidebar && window.innerWidth < 1024) {
+    if (newIndex === 0) {
+      sidebar.classList.add("active");
+    } else {
+      sidebar.classList.remove("active");
+    }
+  }
 }
 
 // Click navigation

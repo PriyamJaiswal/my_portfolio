@@ -212,30 +212,33 @@ article { display: none; }
 
 article.active {
   display: block;
-  animation: fade 0.4s cubic-bezier(0.25, 1, 0.5, 1) backwards;
+  animation: fade 0.3s ease backwards;
+  will-change: transform, opacity;
 }
 
 article.active.slide-in-right {
-  animation: slideInRight 0.38s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+  animation: slideInRight 0.32s cubic-bezier(0.25, 1, 0.5, 1) backwards;
+  will-change: transform, opacity;
 }
 
 article.active.slide-in-left {
-  animation: slideInLeft 0.38s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+  animation: slideInLeft 0.32s cubic-bezier(0.25, 1, 0.5, 1) backwards;
+  will-change: transform, opacity;
 }
 
 @keyframes fade {
-  0% { opacity: 0; transform: translateY(8px); }
-  100% { opacity: 1; transform: translateY(0); }
+  0% { opacity: 0; transform: translate3d(0, 6px, 0); }
+  100% { opacity: 1; transform: translate3d(0, 0, 0); }
 }
 
 @keyframes slideInRight {
-  0% { opacity: 0; transform: translateX(35px); }
-  100% { opacity: 1; transform: translateX(0); }
+  0% { opacity: 0; transform: translate3d(20px, 0, 0); }
+  100% { opacity: 1; transform: translate3d(0, 0, 0); }
 }
 
 @keyframes slideInLeft {
-  0% { opacity: 0; transform: translateX(-35px); }
-  100% { opacity: 1; transform: translateX(0); }
+  0% { opacity: 0; transform: translate3d(-20px, 0, 0); }
+  100% { opacity: 1; transform: translate3d(0, 0, 0); }
 }
 
 .h2,
