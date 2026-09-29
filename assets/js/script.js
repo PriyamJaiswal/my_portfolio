@@ -283,7 +283,7 @@ navigationLinks.forEach((link) => {
   });
 });
 
-// Touch / Swipe Navigation (Mobile Slide Gesture)
+// Touch / Swipe Navigation (Mobile & Tablet Slide Gesture)
 let touchStartX = 0;
 let touchStartY = 0;
 let touchStartTime = 0;
@@ -304,7 +304,6 @@ document.addEventListener("touchend", function (e) {
     const deltaY = touchEndY - touchStartY;
     const deltaTime = Date.now() - touchStartTime;
 
-    // Check if user is inside open modal, inputs, or map
     const target = e.target;
     if (target.closest(".modal-container.active") ||
         target.closest("input") ||
@@ -314,16 +313,13 @@ document.addEventListener("touchend", function (e) {
       return;
     }
 
-    // Horizontal swipe threshold: > 45px, mostly horizontal, within 650ms
     if (Math.abs(deltaX) > 45 && Math.abs(deltaX) > Math.abs(deltaY) * 1.2 && deltaTime < 650) {
       const currentIdx = getCurrentPageIndex();
       if (deltaX < 0) {
-        // Swiped Left -> Move to Next section (About -> Resume -> Project -> Certificates -> Contact)
         if (currentIdx < pageOrder.length - 1) {
           navigateToIndex(currentIdx + 1, "next");
         }
       } else {
-        // Swiped Right -> Move to Previous section (Contact -> Certificates -> Project -> Resume -> About)
         if (currentIdx > 0) {
           navigateToIndex(currentIdx - 1, "prev");
         }
@@ -331,6 +327,88 @@ document.addEventListener("touchend", function (e) {
     }
   }
 }, { passive: true });
+
+
+// Laptop & Desktop Mouse Drag Navigation
+let mouseStartX = 0;
+let mouseStartY = 0;
+let mouseStartTime = 0;
+let isMouseDragging = false;
+
+document.addEventListener("mousedown", function (e) {
+  // Only primary mouse button
+  if (e.button !== 0) return;
+  
+  // Don't drag if clicking buttons, links, inputs, or inside modals
+  if (e.target.closest("a, button, input, textarea, select, .modal-container, iframe, .mapbox, .filter-item")) {
+    return;
+  }
+
+  mouseStartX = e.clientX;
+  mouseStartY = e.clientY;
+  mouseStartTime = Date.now();
+  isMouseDragging = true;
+});
+
+document.addEventListener("mouseup", function (e) {
+  if (!isMouseDragging) return;
+  isMouseDragging = false;
+
+  const deltaX = e.clientX - mouseStartX;
+  const deltaY = e.clientY - mouseStartY;
+  const deltaTime = Date.now() - mouseStartTime;
+
+  if (Math.abs(deltaX) > 55 && Math.abs(deltaX) > Math.abs(deltaY) * 1.2 && deltaTime < 700) {
+    const currentIdx = getCurrentPageIndex();
+    if (deltaX < 0) {
+      // Dragged Left -> Next Section
+      if (currentIdx < pageOrder.length - 1) {
+        navigateToIndex(currentIdx + 1, "next");
+      }
+    } else {
+      // Dragged Right -> Previous Section
+      if (currentIdx > 0) {
+        navigateToIndex(currentIdx - 1, "prev");
+      }
+    }
+  }
+});
+
+
+// Laptop Trackpad Horizontal Swipe Navigation (Two-finger swipe)
+let lastTrackpadTime = 0;
+
+document.addEventListener("wheel", function (e) {
+  // Check if horizontal scroll on trackpad
+  const absX = Math.abs(e.deltaX);
+  const absY = Math.abs(e.deltaY);
+
+  if (absX > 35 && absX > absY * 1.4) {
+    const now = Date.now();
+    if (now - lastTrackpadTime > 650) {
+      // Check if inside modal
+      if (e.target.closest(".modal-container.active") || e.target.closest(".mapbox")) {
+        return;
+      }
+
+      lastTrackpadTime = now;
+      const currentIdx = getCurrentPageIndex();
+
+      if (e.deltaX > 35) {
+        // Trackpad Swipe Left -> Next Section
+        if (currentIdx < pageOrder.length - 1) {
+          navigateToIndex(currentIdx + 1, "next");
+        }
+      } else if (e.deltaX < -35) {
+        // Trackpad Swipe Right -> Prev Section
+        if (currentIdx > 0) {
+          navigateToIndex(currentIdx - 1, "prev");
+        }
+      }
+    }
+  }
+}, { passive: true });
+
 
 // Keyboard Arrow Navigation (Left/Right)
 document.addEventListener("keydown", function (e) {

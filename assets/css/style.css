@@ -320,7 +320,7 @@ article.active.slide-in-left {
 
 main {
   margin: 15px 12px;
-  margin-bottom: 75px;
+  margin-bottom: 40px;
   min-width: 259px;
 }
 
@@ -339,7 +339,7 @@ main {
   transition: var(--transition-2);
 }
 
-.sidebar.active { max-height: 405px; }
+.sidebar.active { max-height: 620px; }
 
 .sidebar-info {
   position: relative;
@@ -496,8 +496,7 @@ main {
   justify-content: flex-start;
   align-items: center;
   gap: 14px;
-  padding-bottom: 4px;
-  padding-left: 4px;
+  padding: 4px 4px 16px 4px;
 }
 
 .social-item .social-link {
@@ -548,18 +547,20 @@ main {
 \*-----------------------------------*/
 
 .navbar {
-  position: fixed;
-  bottom: 0;
+  position: sticky;
+  top: 12px;
+  bottom: auto;
   left: 0;
   width: 100%;
-  background: hsla(240, 1%, 17%, 0.85);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-top: 1px solid var(--jet);
-  border-radius: 16px 16px 0 0;
-  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.5);
-  z-index: 20;
+  background: hsla(240, 1%, 17%, 0.9);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--jet);
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+  z-index: 50;
   padding: 0 4px;
+  margin-bottom: 20px;
 }
 
 .navbar-list {
@@ -1576,7 +1577,7 @@ textarea.form-input::-webkit-resizer { display: none; }
     margin-bottom: 30px;
   }
 
-  .sidebar.active { max-height: 584px; }
+  .sidebar.active { max-height: 650px; }
 
   .sidebar-info { gap: 25px; }
 
