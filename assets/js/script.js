@@ -219,27 +219,136 @@ if (form) {
 // page navigation variables
 const navigationLinks = document.querySelectorAll("[data-nav-link]");
 const pages = document.querySelectorAll("[data-page]");
+const pageOrder = ["about", "resume", "project", "certificates", "contact"];
 
-// add event to all nav link
-for (let i = 0; i < navigationLinks.length; i++) {
-  navigationLinks[i].addEventListener("click", function () {
+function getCurrentPageIndex() {
+  for (let i = 0; i < pages.length; i++) {
+    if (pages[i].classList.contains("active")) {
+      const pName = pages[i].dataset.page.toLowerCase();
+      const idx = pageOrder.indexOf(pName);
+      if (idx !== -1) return idx;
+    }
+  }
+  return 0;
+}
 
-    const target = this.innerText.trim().toLowerCase();
+function navigateToIndex(newIndex, direction) {
+  if (newIndex < 0 || newIndex >= pageOrder.length) return;
+  const targetPage = pageOrder[newIndex];
 
-    navigationLinks.forEach(link => link.classList.remove("active"));
-    this.classList.add("active");
+  // update nav links
+  navigationLinks.forEach(link => {
+    const text = link.innerText.trim().toLowerCase();
+    if (text === targetPage ||
+        (targetPage === "project" && text.startsWith("project")) ||
+        (targetPage === "certificates" && text.startsWith("certif"))) {
+      link.classList.add("active");
+    } else {
+      link.classList.remove("active");
+    }
+  });
 
-    pages.forEach(page => {
-      const pageName = page.dataset.page.toLowerCase();
-      if (target === pageName ||
-          (target.startsWith("project") && pageName.startsWith("project")) ||
-          (target.startsWith("certif") && pageName.startsWith("certif"))) {
-        page.classList.add("active");
-        window.scrollTo(0, 0);
-      } else {
-        page.classList.remove("active");
+  // update pages with smooth slide animations
+  pages.forEach(page => {
+    const pageName = page.dataset.page.toLowerCase();
+    page.classList.remove("slide-in-right", "slide-in-left");
+    if (pageName === targetPage) {
+      page.classList.add("active");
+      if (direction === "next") {
+        page.classList.add("slide-in-right");
+      } else if (direction === "prev") {
+        page.classList.add("slide-in-left");
       }
-    });
-
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else {
+      page.classList.remove("active");
+    }
   });
 }
+
+// Click navigation
+navigationLinks.forEach((link) => {
+  link.addEventListener("click", function () {
+    const currentIdx = getCurrentPageIndex();
+    const text = this.innerText.trim().toLowerCase();
+    let targetIdx = 0;
+    if (text.startsWith("about")) targetIdx = 0;
+    else if (text.startsWith("resume")) targetIdx = 1;
+    else if (text.startsWith("project")) targetIdx = 2;
+    else if (text.startsWith("certif")) targetIdx = 3;
+    else if (text.startsWith("contact")) targetIdx = 4;
+
+    const direction = targetIdx > currentIdx ? "next" : (targetIdx < currentIdx ? "prev" : "none");
+    navigateToIndex(targetIdx, direction);
+  });
+});
+
+// Touch / Swipe Navigation (Mobile Slide Gesture)
+let touchStartX = 0;
+let touchStartY = 0;
+let touchStartTime = 0;
+
+document.addEventListener("touchstart", function (e) {
+  if (e.touches.length === 1) {
+    touchStartX = e.touches[0].clientX;
+    touchStartY = e.touches[0].clientY;
+    touchStartTime = Date.now();
+  }
+}, { passive: true });
+
+document.addEventListener("touchend", function (e) {
+  if (e.changedTouches.length === 1) {
+    const touchEndX = e.changedTouches[0].clientX;
+    const touchEndY = e.changedTouches[0].clientY;
+    const deltaX = touchEndX - touchStartX;
+    const deltaY = touchEndY - touchStartY;
+    const deltaTime = Date.now() - touchStartTime;
+
+    // Check if user is inside open modal, inputs, or map
+    const target = e.target;
+    if (target.closest(".modal-container.active") ||
+        target.closest("input") ||
+        target.closest("textarea") ||
+        target.closest("iframe") ||
+        target.closest(".mapbox")) {
+      return;
+    }
+
+    // Horizontal swipe threshold: > 45px, mostly horizontal, within 650ms
+    if (Math.abs(deltaX) > 45 && Math.abs(deltaX) > Math.abs(deltaY) * 1.2 && deltaTime < 650) {
+      const currentIdx = getCurrentPageIndex();
+      if (deltaX < 0) {
+        // Swiped Left -> Move to Next section (About -> Resume -> Project -> Certificates -> Contact)
+        if (currentIdx < pageOrder.length - 1) {
+          navigateToIndex(currentIdx + 1, "next");
+        }
+      } else {
+        // Swiped Right -> Move to Previous section (Contact -> Certificates -> Project -> Resume -> About)
+        if (currentIdx > 0) {
+          navigateToIndex(currentIdx - 1, "prev");
+        }
+      }
+    }
+  }
+}, { passive: true });
+
+// Keyboard Arrow Navigation (Left/Right)
+document.addEventListener("keydown", function (e) {
+  const activeEl = document.activeElement;
+  if (activeEl && (activeEl.tagName === "INPUT" || activeEl.tagName === "TEXTAREA")) {
+    return;
+  }
+  const modal = document.querySelector(".modal-container.active");
+  if (modal) return;
+
+  const currentIdx = getCurrentPageIndex();
+  if (e.key === "ArrowRight") {
+    if (currentIdx < pageOrder.length - 1) {
+      navigateToIndex(currentIdx + 1, "next");
+    }
+  } else if (e.key === "ArrowLeft") {
+    if (currentIdx > 0) {
+      navigateToIndex(currentIdx - 1, "prev");
+    }
+  }
+});
