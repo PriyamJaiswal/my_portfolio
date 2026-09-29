@@ -2,7 +2,7 @@
 
 A modern, responsive, and interactive personal developer portfolio website designed with a sleek dark aesthetic, golden accents, and micro-interactions.
 
-Live Demo & Preview: [Priyam Jaiswal Portfolio](https://github.com/PriyamJaiswal/vvv)
+Live Demo & Preview: [Priyam Jaiswal Portfolio](https://github.com/PriyamJaiswal/my_portfolio)
 
 ---
 
@@ -49,8 +49,8 @@ port/
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/PriyamJaiswal/vvv.git
-   cd vvv
+   git clone https://github.com/PriyamJaiswal/my_portfolio.git
+   cd my_portfolio
    ```
 
 2. Open `index.html` in your browser or run a simple local server:
