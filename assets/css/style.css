@@ -341,8 +341,8 @@ main {
 .avatar-box {
   background: var(--bg-gradient-onyx);
   border-radius: 50%;
-  width: 100px;
-  height: 100px;
+  width: 85px;
+  height: 85px;
   overflow: hidden;
   display: flex;
   justify-content: center;
@@ -350,6 +350,7 @@ main {
   border: 3px solid rgba(255, 219, 112, 0.45);
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3), 0 0 15px rgba(255, 219, 112, 0.15);
   transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+  flex-shrink: 0;
 }
 
 .avatar-box:hover {
@@ -533,33 +534,41 @@ main {
   bottom: 0;
   left: 0;
   width: 100%;
-  background: hsla(240, 1%, 17%, 0.75);
-  backdrop-filter: blur(10px);
-  border: 1px solid var(--jet);
-  border-radius: 12px 12px 0 0;
-  box-shadow: var(--shadow-2);
-  z-index: 5;
+  background: hsla(240, 1%, 17%, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-top: 1px solid var(--jet);
+  border-radius: 16px 16px 0 0;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.5);
+  z-index: 20;
+  padding: 0 4px;
 }
 
 .navbar-list {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
-  padding: 0 10px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  width: 100%;
 }
 
 .navbar-link {
   color: var(--light-gray);
-  font-size: var(--fs-8);
-  padding: 20px 7px;
+  font-size: 11px;
+  font-weight: var(--fw-500);
+  padding: 16px 4px;
+  text-align: center;
+  white-space: nowrap;
+  letter-spacing: -0.2px;
   transition: color var(--transition-1);
 }
 
 .navbar-link:hover,
 .navbar-link:focus { color: var(--light-gray-70); }
 
-.navbar-link.active { color: var(--orange-yellow-crayola); }
+.navbar-link.active { color: var(--orange-yellow-crayola); font-weight: var(--fw-600); }
 
 
 
